@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionCard : MonoBehaviour
 {
-    public enum Action { AddMax, AddMin, GainXRed, GainXGreen, GainXBlue, GainOnePremium};
+    public enum Action { AddMax, AddMin, GainXSun, GainXMoon, GainXStar, GainOneCelestial};
     
     //config paramters
     [SerializeField] Action myAction;
@@ -60,17 +60,16 @@ public class ActionCard : MonoBehaviour
             case Action.AddMin:
                 IncreaseMinValue(die);
                 break;
-            case Action.GainXRed:
-            case Action.GainXGreen:
+            case Action.GainXSun:
+            case Action.GainXMoon:
+            case Action.GainXStar:
                 GainXResource(die);
                 break;
-            //case Action.GainXGreen:
                 //GainXResource(die);
                 //break;
-            case Action.GainXBlue:
-                GainXResource(die);
-                break;
-            case Action.GainOnePremium:
+                //GainXResource(die);
+                //break;
+            case Action.GainOneCelestial:
                 GainXResource(die);
                 break;
             default:
@@ -85,20 +84,20 @@ public class ActionCard : MonoBehaviour
     private void IncreaseMaxValue(DieStats die)
     {
         die.maxValue++;
-        actionLog.myText = die.name + " max value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
+        actionLog.myText = die.name + " die max value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
     }
 
     private void IncreaseMinValue(DieStats die)
     {
         if (die.minValue + 1 >= die.maxValue)
         {
-            actionLog.myText = die.name + " min value can't be equal to or greater than its highest value!\n" + actionLog.myText;
+            actionLog.myText = die.name + " die min value can't be equal to or greater than its highest value!\n" + actionLog.myText;
             invalidAction = true;
         }
         else
         {
             die.minValue++;
-            actionLog.myText = die.name + " min value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
+            actionLog.myText = die.name + " die min value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
         }
     }
 
@@ -106,21 +105,21 @@ public class ActionCard : MonoBehaviour
     {
         switch(myAction)
         {
-            case Action.GainXRed:
-                resourceManager.currentRed += die.currentValue;
-                actionLog.myText = "Gained " + die.currentValue.ToString() + " Red resources\n" + actionLog.myText;
+            case Action.GainXSun:
+                resourceManager.currentSun += die.currentValue;
+                actionLog.myText = "Gained " + die.currentValue.ToString() + " Sunbeams\n" + actionLog.myText;
                 break;
-            case Action.GainXGreen:
-                resourceManager.currentGreen += die.currentValue;
-                actionLog.myText = "Gained " + die.currentValue.ToString() + " Green resources\n" + actionLog.myText;
+            case Action.GainXMoon:
+                resourceManager.currentMoon += die.currentValue;
+                actionLog.myText = "Gained " + die.currentValue.ToString() + " Moondrops\n" + actionLog.myText;
                 break;
-            case Action.GainXBlue:
-                resourceManager.currentBlue += die.currentValue;
-                actionLog.myText = "Gained " + die.currentValue.ToString() + " Blue resources\n" + actionLog.myText;
+            case Action.GainXStar:
+                resourceManager.currentStar += die.currentValue;
+                actionLog.myText = "Gained " + die.currentValue.ToString() + " Stardust\n" + actionLog.myText;
                 break;
-            case Action.GainOnePremium:
-                resourceManager.currentPremium++;
-                actionLog.myText = "Gained 1 premium resource!\n" + actionLog.myText;
+            case Action.GainOneCelestial:
+                resourceManager.currentCelestial++;
+                actionLog.myText = "Gained 1 Celestial Wisp!\n" + actionLog.myText;
                 break;
             default:
                 actionLog.myText = "Error! No action defined!\n" + actionLog.myText;

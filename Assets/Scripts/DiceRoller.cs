@@ -9,12 +9,14 @@ public class DiceRoller : MonoBehaviour
 
     //cached references
     ActionLog actionLog;
+    ThreatMeter threatMeter;
 
     
     // Start is called before the first frame update
     void Start()
     {
         actionLog = FindObjectOfType<ActionLog>();
+        threatMeter = FindObjectOfType<ThreatMeter>();
         foreach (DieStats die in allDice)
         {
             int randomValue = Random.Range(die.minValue, die.maxValue + 1);
@@ -30,6 +32,8 @@ public class DiceRoller : MonoBehaviour
 
     public void RollDice()
     {
+        //increase threat
+        threatMeter.currentThreatValue++;
         actionLog.myText = "\n" + actionLog.myText;
         foreach (DieStats die in allDice)
         {
