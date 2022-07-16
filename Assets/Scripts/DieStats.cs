@@ -14,6 +14,7 @@ public class DieStats : MonoBehaviour
 
     //cached references
     Rigidbody2D myRigidbody;
+    List<ActionCard> allActions;
     public List<DieStats> otherDice;
     public Vector3 startingPos;
 
@@ -28,6 +29,7 @@ public class DieStats : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        allActions = new List<ActionCard>(FindObjectsOfType<ActionCard>());
         //currentValue = maxValue;
         otherDice = new List<DieStats>(FindObjectsOfType<DieStats>());
         otherDice.Remove(this);

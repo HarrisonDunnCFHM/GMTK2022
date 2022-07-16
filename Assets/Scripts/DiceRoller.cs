@@ -42,7 +42,10 @@ public class DiceRoller : MonoBehaviour
     public void RollDice()
     {
         //increase threat
-        threatMeter.currentThreatValue++;
+        if (threatMeter.currentThreatValue < allDice[0].maxValue + allDice[1].maxValue + allDice[2].maxValue)
+        {
+            threatMeter.currentThreatValue++;
+        }
         actionLog.myText = "\n" + actionLog.myText;
         foreach (DieStats die in allDice)
         {
@@ -54,7 +57,9 @@ public class DiceRoller : MonoBehaviour
         }
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
         EarnWisps(rolledSum);
+        CheckThreat(rolledSum);
     }
+
 
     private void EarnWisps(int rolledSum)
     {
@@ -71,5 +76,23 @@ public class DiceRoller : MonoBehaviour
             resourceManager.currentCelestial += earnedWisps;
         }
         earnedWisps = 0;
+    }
+    private void CheckThreat(int rolledSum)
+    {
+        if(rolledSum < threatMeter.currentThreatValue)
+        {
+            int threatDiff = threatMeter.currentThreatValue - rolledSum;
+            resourceManager.currentCelestial -= threatDiff;
+            if (resourceManager.currentCelestial < 0)
+            {
+                actionLog.myText = "Uh oh. You rolled lower than the current threat level AND didn't have enough Celestial Wisps. " +
+                    "You've lost the game...\n" + actionLog.myText;
+            }
+            else
+            {
+                actionLog.myText = "Oh no! You rolled lower than the current threat level. You paid " + threatDiff.ToString() +
+                    " to hold off the darkness!\n" + actionLog.myText;
+            }
+        }
     }
 }
