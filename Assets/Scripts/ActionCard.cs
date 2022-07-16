@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionCard : MonoBehaviour
 {
-    public enum Action { AddMax, AddMin, GainXSun, GainXMoon, GainXStar, GainOneCelestial};
+    public enum Action { AddMax, AddMin, GainXSun, GainXMoon, GainXStar, GainOneCelestial, UpgradeTracker};
     
     //config paramters
     [SerializeField] Action myAction;
@@ -13,6 +13,7 @@ public class ActionCard : MonoBehaviour
     //cached refs
     ActionLog actionLog;
     ResourceManager resourceManager;
+    List<WispTracker> wispTrackers;
     bool invalidAction = false;
     
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class ActionCard : MonoBehaviour
     {
         actionLog = FindObjectOfType<ActionLog>();
         resourceManager = FindObjectOfType<ResourceManager>();
+        wispTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
     }
 
     // Update is called once per frame
@@ -72,6 +74,9 @@ public class ActionCard : MonoBehaviour
             case Action.GainOneCelestial:
                 GainXResource(die);
                 break;
+            case Action.UpgradeTracker:
+                UpgradeTracker();
+                break;
             default:
                 actionLog.myText = "Error! No action defined!\n" + actionLog.myText;
                 Debug.Log("no action defined");
@@ -84,7 +89,7 @@ public class ActionCard : MonoBehaviour
     private void IncreaseMaxValue(DieStats die)
     {
         die.maxValue++;
-        actionLog.myText = die.name + " die max value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
+        actionLog.myText = die.name + " die max value increased to " + die.maxValue.ToString() + "!\n" + actionLog.myText;
     }
 
     private void IncreaseMinValue(DieStats die)
@@ -97,7 +102,7 @@ public class ActionCard : MonoBehaviour
         else
         {
             die.minValue++;
-            actionLog.myText = die.name + " die min value increased to " + die.maxValue.ToString() + "!\n" + actionLog.myText;
+            actionLog.myText = die.name + " die min value increased to " + die.minValue.ToString() + "!\n" + actionLog.myText;
         }
     }
 
@@ -125,6 +130,27 @@ public class ActionCard : MonoBehaviour
                 actionLog.myText = "Error! No action defined!\n" + actionLog.myText;
                 Debug.Log("no action defined");
                 break;
+        }
+    }
+
+    private void UpgradeTracker()
+    {
+        foreach (WispTracker wispTracker in wispTrackers)
+        {
+            var otherTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
+            otherTrackers.Remove(wispTracker);
+            bool oneBelow = false;
+            foreach (WispTracker otherTracker in otherTrackers)
+            {
+                if(otherTracker.currentThreshold == wispTracker.currentThreshold - 1)
+                {
+                    oneBelow = true;
+                }
+            }
+            if (!oneBelow)
+            {
+                wispTracker.upgradeable = true;
+            }
         }
     }
 }
