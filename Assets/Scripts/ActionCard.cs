@@ -97,7 +97,7 @@ public class ActionCard : MonoBehaviour
         else
         {
             die.minValue++;
-            actionLog.myText = die.name + " die min value increased to " + die.maxValue.ToString() + "! (+1)\n" + actionLog.myText;
+            actionLog.myText = die.name + " die min value increased to " + die.maxValue.ToString() + "!\n" + actionLog.myText;
         }
     }
 

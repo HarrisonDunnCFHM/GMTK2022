@@ -13,6 +13,8 @@ public class ThreatMeter : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentThreatValueText;
     [SerializeField] GameObject sumTracker;
     [SerializeField] GameObject threatTracker;
+    [SerializeField] List<WispTracker> wispTrackers;
+    [SerializeField] List<TextMeshProUGUI> wispTrackersValueTexts;
 
     //cached references
     Slider mySlider;
@@ -34,6 +36,7 @@ public class ThreatMeter : MonoBehaviour
 
         UpdateSumTracker();
         UpdateThreatTracker();
+        UpdateWispTrackers();
     }
 
     private void UpdateSumTracker()
@@ -52,5 +55,16 @@ public class ThreatMeter : MonoBehaviour
         var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
         var newThreatTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, threatTracker.transform.position.y, threatTracker.transform.position.z);
         threatTracker.transform.position = newThreatTrackerPos;
+    }
+    private void UpdateWispTrackers()
+    {
+        for (int i=0; i < wispTrackers.Count; i++)
+        {
+            wispTrackersValueTexts[i].text = wispTrackers[i].currentThreshold.ToString();
+            var sliderOffset = (wispTrackers[i].currentThreshold - (mySlider.maxValue / 2)) / (mySlider.maxValue / 2);
+            var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
+            var newWispTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, wispTrackers[i].transform.position.y, wispTrackers[i].transform.position.z);
+            wispTrackers[i].transform.position = newWispTrackerPos;
+        }
     }
 }
