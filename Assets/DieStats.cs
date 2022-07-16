@@ -28,7 +28,7 @@ public class DieStats : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        currentValue = maxValue;
+        //currentValue = maxValue;
         otherDice = new List<DieStats>(FindObjectsOfType<DieStats>());
         otherDice.Remove(this);
         startingPos = transform.position;
