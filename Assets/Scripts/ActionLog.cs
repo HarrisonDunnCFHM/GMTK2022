@@ -14,7 +14,7 @@ public class ActionLog : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myText = "Hello world! \nLet's go";
+        myText = "Good luck!\n";
     }
 
     // Update is called once per frame

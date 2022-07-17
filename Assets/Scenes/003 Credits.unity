@@ -152,6 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacbf731b9c98b94298dfe4a650d7219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
+  scoreText: {fileID: 0}
+  gameOver: 0
 --- !u!4 &11372590
 Transform:
   m_ObjectHideFlags: 0
@@ -610,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7802585530847848239, guid: b35641e05f4ac4b458efdd984c6652f6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 130
+      value: 153.34
       objectReference: {fileID: 0}
     - target: {fileID: 7802585530847848239, guid: b35641e05f4ac4b458efdd984c6652f6, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1006,8 +1009,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Design, Programming, Art - CFHM\nMusic - John Praw\nSFX - \nBackground
-    Art - Digital Moons"
+  m_text: 'Design, Programming, Art, SFX - CFHM
+
+    Music - John Praw
+
+    Background
+    Art - Digital Moons'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9feba9ddb7e4f346a87dc42787e9f02, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: a9feba9ddb7e4f346a87dc42787e9f02, type: 2}

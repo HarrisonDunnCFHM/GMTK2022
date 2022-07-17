@@ -67,22 +67,21 @@ public class DieStats : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
             myRigidbody.velocity = (startingPos - myRigidbody.transform.position) * moveSpeed;
-            if (!wrongMove)
-            {
-                myParticles.Play();
-            }
         }
         var distToPos = Vector2.Distance(startingPos, myRigidbody.transform.position);
         if(distToPos <= snapDist && moving)
         {
+            if (!wrongMove)
+            {
+                int randomIndex = Random.Range(0, rollSounds.Count);
+                float volume = audioManager.masterVolume;
+                AudioSource.PlayClipAtPoint(rollSounds[randomIndex], Camera.main.transform.position, volume);
+                myParticles.Play();
+            }
             transform.position = startingPos;
             GetComponent<Collider2D>().enabled = true;
             moving = false;
             wrongMove = false;
-            int randomIndex = Random.Range(0, rollSounds.Count);
-            float volume = audioManager.masterVolume;
-            AudioSource.PlayClipAtPoint(rollSounds[randomIndex], Camera.main.transform.position, volume);
-            Debug.Log("played audio on " + name);
         }
     }
 
