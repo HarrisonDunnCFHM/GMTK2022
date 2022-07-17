@@ -15,6 +15,7 @@ public class ThreatMeter : MonoBehaviour
     [SerializeField] GameObject threatTracker;
     [SerializeField] List<WispTracker> wispTrackers;
     [SerializeField] List<TextMeshProUGUI> wispTrackersValueTexts;
+    [SerializeField] float moveSpeed = 5f;
 
     //cached references
     Slider mySlider;
@@ -46,7 +47,8 @@ public class ThreatMeter : MonoBehaviour
         var sliderOffset = (sumValue - (mySlider.maxValue / 2)) / (mySlider.maxValue / 2);
         var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
         var newSumTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, sumTracker.transform.position.y, sumTracker.transform.position.z);
-        sumTracker.transform.position = newSumTrackerPos;
+        
+        sumTracker.transform.position = Vector2.MoveTowards(sumTracker.transform.position, newSumTrackerPos, moveSpeed * Time.deltaTime);
     }
     private void UpdateThreatTracker()
     {
@@ -54,7 +56,8 @@ public class ThreatMeter : MonoBehaviour
         var sliderOffset = (currentThreatValue - (mySlider.maxValue / 2)) / (mySlider.maxValue / 2);
         var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
         var newThreatTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, threatTracker.transform.position.y, threatTracker.transform.position.z);
-        threatTracker.transform.position = newThreatTrackerPos;
+        threatTracker.transform.position = Vector2.MoveTowards(threatTracker.transform.position, newThreatTrackerPos, moveSpeed * Time.deltaTime);
+
     }
     private void UpdateWispTrackers()
     {
@@ -64,7 +67,8 @@ public class ThreatMeter : MonoBehaviour
             var sliderOffset = (wispTrackers[i].currentThreshold - (mySlider.maxValue / 2)) / (mySlider.maxValue / 2);
             var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
             var newWispTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, wispTrackers[i].transform.position.y, wispTrackers[i].transform.position.z);
-            wispTrackers[i].transform.position = newWispTrackerPos;
+            //wispTrackers[i].transform.position = newWispTrackerPos;
+            wispTrackers[i].transform.position = Vector2.MoveTowards(wispTrackers[i].transform.position, newWispTrackerPos, moveSpeed * Time.deltaTime);
         }
     }
 }

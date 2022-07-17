@@ -112,8 +112,9 @@ public class ActionCard : MonoBehaviour
             TriggerAbility(myAction, collision.GetComponent<DieStats>());
             if (invalidAction)
             {
-                collision.transform.position = collision.GetComponent<DieStats>().startingPos;
                 collision.GetComponent<DieStats>().grabbed = false;
+                collision.GetComponent<DieStats>().moving = true;
+                collision.GetComponent<DieStats>().wrongMove = true;
                 invalidAction = false;
             }
             else
@@ -122,6 +123,7 @@ public class ActionCard : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 collision.GetComponent<DieStats>().locked = true;
                 collision.GetComponent<DieStats>().grabbed = false;
+                collision.GetComponent<DieStats>().myParticles.Play();
             }
         }
     }

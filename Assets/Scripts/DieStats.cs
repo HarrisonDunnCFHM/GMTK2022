@@ -10,7 +10,9 @@ public class DieStats : MonoBehaviour
     //config variables
     [SerializeField] TextMeshProUGUI valueText;
     [SerializeField] TextMeshProUGUI statusText;
+    [SerializeField] public ParticleSystem myParticles;
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float snapDist = 0.3f;
 
     //cached references
     Rigidbody2D myRigidbody;
@@ -24,7 +26,9 @@ public class DieStats : MonoBehaviour
     bool hovered = false;
     public bool grabbed = false;
     public bool locked = false;
-    
+    public bool moving = false;
+    public bool wrongMove = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +43,47 @@ public class DieStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        valueText.text = currentValue.ToString();
+        if (currentValue == 0)
+        {
+            valueText.text = "";
+        }
+        else
+        {
+            valueText.text = currentValue.ToString();
+        }
         statusText.text = name + ": " + minValue.ToString() + " - " + maxValue.ToString();
         GrabDice();
+        ReturnHome();
+    }
+
+    private void ReturnHome()
+    {
+        if (moving)
+        {
+            GetComponent<Collider2D>().enabled = false;
+            myRigidbody.velocity = (startingPos - myRigidbody.transform.position) * moveSpeed;
+            if (!wrongMove)
+            {
+                myParticles.Play();
+            }
+        }
+        var distToPos = Vector2.Distance(startingPos, myRigidbody.transform.position);
+        if(distToPos <= snapDist && moving)
+        {
+            transform.position = startingPos;
+            GetComponent<Collider2D>().enabled = true;
+            moving = false;
+            wrongMove = false;
+        }
     }
 
     private void GrabDice()
     {
+        if (moving)
+        {
+            myRigidbody.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+            return; 
+        }
         if (!grabbed)
         {
             myRigidbody.velocity = Vector3.zero;
@@ -63,6 +101,7 @@ public class DieStats : MonoBehaviour
         var adjustedMousePos = new Vector3(mousePos.x, mousePos.y, transform.position.z);
         if((Input.GetMouseButton(0) && hovered) || grabbed)
         {
+            //moving = true;
             grabbed = true;
             myRigidbody.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
             foreach(ActionCard action in allActions)
