@@ -8,10 +8,12 @@ public class DiceRoller : MonoBehaviour
     [SerializeField] List<DieStats> allDice;
     [SerializeField] float dieSpin = 0.5f;
     [SerializeField] Sprite defaultSprite;
+    [SerializeField] List<AudioClip> shakeSounds;
 
     //cached references
     ActionLog actionLog;
     ThreatMeter threatMeter;
+    AudioManager audioManager;
     ResourceManager resourceManager;
     List<WispTracker> wispTrackers;
     int rolledSum;
@@ -22,22 +24,11 @@ public class DiceRoller : MonoBehaviour
     void Start()
     {
         actionLog = FindObjectOfType<ActionLog>();
+        audioManager = FindObjectOfType<AudioManager>();
         threatMeter = FindObjectOfType<ThreatMeter>();
         resourceManager = FindObjectOfType<ResourceManager>();
         wispTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
         StartCoroutine(RollDice());
-
-
-      /*  foreach (DieStats die in allDice)
-        {
-            int randomValue = Random.Range(die.minValue, die.maxValue + 1);
-            die.currentValue = randomValue;
-            die.GetComponent<Animator>().enabled = false;
-            die.GetComponent<SpriteRenderer>().sprite = defaultSprite;
-            //die.GetComponent<Animator>().Play("Die Roll", 2, 0f);
-
-        }
-        Invoke("EarnWisps",0.1f);*/
     }
 
     // Update is called once per frame
@@ -57,9 +48,9 @@ public class DiceRoller : MonoBehaviour
 
     public IEnumerator RollDice()
     {
-        
-        //if (rolling) { yield return null; }
         rolling = true;
+        int randomShake = Random.Range(0, shakeSounds.Count);
+        AudioSource.PlayClipAtPoint(shakeSounds[randomShake], Camera.main.transform.position, audioManager.masterVolume);
         //increase threat
         yield return new WaitForSeconds(dieSpin);
         actionLog.myText = "\n" + actionLog.myText;
@@ -81,6 +72,7 @@ public class DiceRoller : MonoBehaviour
             allDice[i].GetComponent<SpriteRenderer>().sprite = defaultSprite;
             allDice[i].locked = false;
             allDice[i].moving = true;
+            
         }
         yield return new WaitForSeconds(dieSpin);
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;

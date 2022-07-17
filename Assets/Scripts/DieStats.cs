@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
+//using System;
 
 public class DieStats : MonoBehaviour
 {
@@ -13,9 +13,12 @@ public class DieStats : MonoBehaviour
     [SerializeField] public ParticleSystem myParticles;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float snapDist = 0.3f;
+    [SerializeField] List<AudioClip> rollSounds;
 
     //cached references
     Rigidbody2D myRigidbody;
+    AudioManager audioManager;
+    AudioSource myAudioSource;
     List<ActionCard> allActions;
     public List<DieStats> otherDice;
     public Vector3 startingPos;
@@ -33,6 +36,8 @@ public class DieStats : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        audioManager = FindObjectOfType<AudioManager>();
+        myAudioSource = GetComponent<AudioSource>();
         allActions = new List<ActionCard>(FindObjectsOfType<ActionCard>());
         //currentValue = maxValue;
         otherDice = new List<DieStats>(FindObjectsOfType<DieStats>());
@@ -74,6 +79,10 @@ public class DieStats : MonoBehaviour
             GetComponent<Collider2D>().enabled = true;
             moving = false;
             wrongMove = false;
+            int randomIndex = Random.Range(0, rollSounds.Count);
+            float volume = audioManager.masterVolume;
+            AudioSource.PlayClipAtPoint(rollSounds[randomIndex], Camera.main.transform.position, volume);
+            Debug.Log("played audio on " + name);
         }
     }
 
