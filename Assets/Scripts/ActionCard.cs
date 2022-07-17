@@ -402,6 +402,7 @@ public class ActionCard : MonoBehaviour
 
     private void UpgradeTracker()
     {
+        actionLog.myText = "Click a shining tracker to upgrade it!\n" + actionLog.myText;
         foreach (WispTracker wispTracker in wispTrackers)
         {
             var otherTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());

@@ -12,6 +12,7 @@ public class DiceRoller : MonoBehaviour
 
     //cached references
     ActionLog actionLog;
+    SceneChanger sceneChanger;
     ThreatMeter threatMeter;
     AudioManager audioManager;
     ResourceManager resourceManager;
@@ -24,6 +25,7 @@ public class DiceRoller : MonoBehaviour
     void Start()
     {
         actionLog = FindObjectOfType<ActionLog>();
+        sceneChanger = FindObjectOfType<SceneChanger>();
         audioManager = FindObjectOfType<AudioManager>();
         threatMeter = FindObjectOfType<ThreatMeter>();
         resourceManager = FindObjectOfType<ResourceManager>();
@@ -38,7 +40,7 @@ public class DiceRoller : MonoBehaviour
     }
     public void ButtonRollDice()
     {
-        if (rolling) { return; }
+        if (rolling || sceneChanger.gameOver) { return; }
         if (threatMeter.currentThreatValue < allDice[0].maxValue + allDice[1].maxValue + allDice[2].maxValue)
         {
             threatMeter.currentThreatValue++;
@@ -109,6 +111,7 @@ public class DiceRoller : MonoBehaviour
             {
                 actionLog.myText = "Uh oh. You rolled lower than the current threat level AND didn't have enough Celestial Wisps. " +
                     "You've lost the game...\n" + actionLog.myText;
+                sceneChanger.gameOver = true;
             }
             else
             {
