@@ -29,8 +29,7 @@ public class DiceRoller : MonoBehaviour
             int randomValue = Random.Range(die.minValue, die.maxValue + 1);
             die.currentValue = randomValue;        
         }
-        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
-        EarnWisps(rolledSum);
+        Invoke("EarnWisps",0.1f);
     }
 
     // Update is called once per frame
@@ -56,13 +55,14 @@ public class DiceRoller : MonoBehaviour
             die.locked = false;
         }
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
-        EarnWisps(rolledSum);
+        EarnWisps();
         CheckThreat(rolledSum);
     }
 
 
-    private void EarnWisps(int rolledSum)
+    private void EarnWisps()
     {
+        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
         foreach (WispTracker wispTracker in wispTrackers)
         {
             if (rolledSum >= wispTracker.currentThreshold)

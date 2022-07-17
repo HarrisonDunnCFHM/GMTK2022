@@ -309,6 +309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 2
   myActionSlot: {fileID: 1020707045}
+  myCostText: {fileID: 0}
+  actionCost: 0
+  resourceCost: 0
 --- !u!61 &22903579
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3660,6 +3663,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 6
   myActionSlot: {fileID: 944224543}
+  myCostText: {fileID: 1928620008}
+  actionCost: 0
+  resourceCost: 0
 --- !u!1 &862088317
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,6 +3746,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 4
   myActionSlot: {fileID: 1578851975}
+  myCostText: {fileID: 0}
+  actionCost: 0
+  resourceCost: 0
 --- !u!4 &862088321
 Transform:
   m_ObjectHideFlags: 0
@@ -6077,6 +6086,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 0
   myActionSlot: {fileID: 1216004713}
+  myCostText: {fileID: 201783042}
+  actionCost: 0
+  resourceCost: 0
 --- !u!1 &1348201045
 GameObject:
   m_ObjectHideFlags: 0
@@ -8737,6 +8749,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 1
   myActionSlot: {fileID: 174121369}
+  myCostText: {fileID: 1160092860}
+  actionCost: 0
+  resourceCost: 0
 --- !u!1 &1928620006
 GameObject:
   m_ObjectHideFlags: 0
@@ -8795,7 +8810,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost: 1 Sunbeam, Moondrop, and Stardust'
+  m_text: 'Cost: 1 Sunbeam, Moondrop, Stardust'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
@@ -9171,6 +9186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAction: 3
   myActionSlot: {fileID: 74244629}
+  myCostText: {fileID: 0}
+  actionCost: 0
+  resourceCost: 0
 --- !u!4 &2016255868
 Transform:
   m_ObjectHideFlags: 0

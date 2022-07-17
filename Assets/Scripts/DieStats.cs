@@ -65,6 +65,10 @@ public class DieStats : MonoBehaviour
         {
             grabbed = true;
             myRigidbody.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+            foreach(ActionCard action in allActions)
+            {
+                action.GetComponent<Collider2D>().enabled = false;
+            }
             if(transform.position != adjustedMousePos)
             {
                 myRigidbody.velocity = (adjustedMousePos - myRigidbody.transform.position) * moveSpeed;
@@ -73,6 +77,10 @@ public class DieStats : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             grabbed = false;
+            foreach (ActionCard action in allActions)
+            {
+                action.GetComponent<Collider2D>().enabled = true;
+            }
         }
     }
 
