@@ -17,6 +17,7 @@ public class DiceRoller : MonoBehaviour
     AudioManager audioManager;
     ResourceManager resourceManager;
     List<WispTracker> wispTrackers;
+    List<ActionCard> actionCards;
     int rolledSum;
     int earnedWisps;
     bool rolling = false;
@@ -30,6 +31,7 @@ public class DiceRoller : MonoBehaviour
         threatMeter = FindObjectOfType<ThreatMeter>();
         resourceManager = FindObjectOfType<ResourceManager>();
         wispTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
+        actionCards = new List<ActionCard>(FindObjectsOfType<ActionCard>());
         StartCoroutine(RollDice());
     }
 
@@ -44,6 +46,10 @@ public class DiceRoller : MonoBehaviour
         if (threatMeter.currentThreatValue < allDice[0].maxValue + allDice[1].maxValue + allDice[2].maxValue)
         {
             threatMeter.currentThreatValue++;
+            foreach(ActionCard card in actionCards)
+            {
+                card.hasDie = false;
+            }
         }
         StartCoroutine(RollDice());
     }

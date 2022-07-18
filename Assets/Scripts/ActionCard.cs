@@ -20,6 +20,7 @@ public class ActionCard : MonoBehaviour
     List<DieStats> allDice;
     DieStats grabbedDie;
     bool invalidAction = false;
+    public bool hasDie = false;
     public int actionCost;
     public ResourceType resourceCost;
     int upgradeTrackerCost = 1;
@@ -107,6 +108,7 @@ public class ActionCard : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasDie) { return; }
         if (collision.GetComponent<DieStats>())
         {
             TriggerAbility(myAction, collision.GetComponent<DieStats>());
@@ -124,6 +126,7 @@ public class ActionCard : MonoBehaviour
                 collision.GetComponent<DieStats>().locked = true;
                 collision.GetComponent<DieStats>().grabbed = false;
                 collision.GetComponent<DieStats>().myParticles.Play();
+                hasDie = true;
             }
         }
     }
