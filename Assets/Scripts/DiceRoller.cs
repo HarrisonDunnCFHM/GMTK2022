@@ -122,7 +122,7 @@ public class DiceRoller : MonoBehaviour
             else
             {
                 actionLog.myText = "Oh no! You rolled lower than the current threat level. You paid " + threatDiff.ToString() +
-                    " to hold off the darkness!\n" + actionLog.myText;
+                    " Wisps to hold off the darkness!\n" + actionLog.myText;
             }
         }
     }
