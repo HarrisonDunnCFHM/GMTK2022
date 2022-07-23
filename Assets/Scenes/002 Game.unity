@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 22903578}
   - component: {fileID: 22903580}
   - component: {fileID: 22903579}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -338,7 +338,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &22903580
 Rigidbody2D:
@@ -19021,7 +19021,7 @@ GameObject:
   - component: {fileID: 738434496}
   - component: {fileID: 738434495}
   - component: {fileID: 738434494}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19059,7 +19059,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19070,7 +19070,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &738434495
 Rigidbody2D:
@@ -19299,7 +19299,7 @@ GameObject:
   - component: {fileID: 862088320}
   - component: {fileID: 862088319}
   - component: {fileID: 862088318}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19319,7 +19319,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19330,7 +19330,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &862088319
 Rigidbody2D:
@@ -21669,7 +21669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: reroll
+  m_text: roll dice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
@@ -22901,7 +22901,7 @@ GameObject:
   - component: {fileID: 1344323157}
   - component: {fileID: 1344323156}
   - component: {fileID: 1344323155}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22939,7 +22939,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -22950,7 +22950,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &1344323156
 Rigidbody2D:
@@ -26484,7 +26484,7 @@ GameObject:
   - component: {fileID: 1902520361}
   - component: {fileID: 1902520360}
   - component: {fileID: 1902520359}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26522,7 +26522,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -26533,7 +26533,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &1902520360
 Rigidbody2D:
@@ -27127,7 +27127,7 @@ GameObject:
   - component: {fileID: 2016255867}
   - component: {fileID: 2016255866}
   - component: {fileID: 2016255865}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Action Card (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27147,7 +27147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.0002296, y: 0}
+  m_Offset: {x: -0.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -27158,7 +27158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &2016255866
 Rigidbody2D:
