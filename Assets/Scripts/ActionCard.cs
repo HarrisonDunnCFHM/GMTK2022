@@ -128,6 +128,10 @@ public class ActionCard : MonoBehaviour
             case Action.UpgradeTracker:
                 actionCost = upgradeTrackerCost;
                 resourceCost = ResourceType.All;
+                if(actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
+                {
+                    canAfford = false;
+                }
                 myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
                 break;
             default:
@@ -204,7 +208,7 @@ public class ActionCard : MonoBehaviour
 
                     return true;
                 }
-                else if(cost <= (resourceManager.currentSun + resourceManager.currentCelestial))
+                /*else if(cost <= (resourceManager.currentSun + resourceManager.currentCelestial))
                 {
                     cost -= resourceManager.currentSun;
                     var sunPaid = resourceManager.currentSun;
@@ -212,7 +216,7 @@ public class ActionCard : MonoBehaviour
                     resourceManager.currentCelestial -= cost;
                     actionLog.myText = "Paid " + sunPaid.ToString() + " Sunbeams and " + cost.ToString() + " Wisps...\n" + actionLog.myText;
                     return true;
-                }
+                }*/
                 else
                 {
                     actionLog.myText = "Insufficient resources!\n" + actionLog.myText;
@@ -227,7 +231,7 @@ public class ActionCard : MonoBehaviour
 
                     return true;
                 }
-                else if (cost <= (resourceManager.currentMoon + resourceManager.currentCelestial))
+                /*else if (cost <= (resourceManager.currentMoon + resourceManager.currentCelestial))
                 {
                     cost -= resourceManager.currentMoon;
                     var moonPaid = resourceManager.currentMoon;
@@ -235,7 +239,7 @@ public class ActionCard : MonoBehaviour
                     resourceManager.currentCelestial -= cost;
                     actionLog.myText = "Paid " + moonPaid.ToString() + " Moondrops and " + cost.ToString() + " Wisps...\n" + actionLog.myText;
                     return true;
-                }
+                }*/
                 else
                 {
                     actionLog.myText = "Insufficient resources!\n" + actionLog.myText;
@@ -250,7 +254,7 @@ public class ActionCard : MonoBehaviour
 
                     return true;
                 }
-                else if (cost <= (resourceManager.currentStar + resourceManager.currentCelestial))
+                /*else if (cost <= (resourceManager.currentStar + resourceManager.currentCelestial))
                 {
                     cost -= resourceManager.currentStar;
                     var starPaid = resourceManager.currentStar;
@@ -258,7 +262,7 @@ public class ActionCard : MonoBehaviour
                     resourceManager.currentCelestial -= cost;
                     actionLog.myText = "Paid " + starPaid.ToString() + " Stardust and " + cost.ToString() + " Wisps...\n" + actionLog.myText;
                     return true;
-                }
+                }*/
                 else
                 {
                     actionLog.myText = "Insufficient resources!\n" + actionLog.myText;
@@ -290,7 +294,7 @@ public class ActionCard : MonoBehaviour
                     upgradeTrackerCost++;
                     return true;
                 }
-                else if (cost <= resourceManager.currentSun + resourceManager.currentMoon + resourceManager.currentStar + resourceManager.currentCelestial)
+                /*else if (cost <= resourceManager.currentSun + resourceManager.currentMoon + resourceManager.currentStar + resourceManager.currentCelestial)
                 {
                     int tempSun = resourceManager.currentSun;
                     int paidSun = 0;
@@ -371,7 +375,7 @@ public class ActionCard : MonoBehaviour
                         paidWisp.ToString() + " Wisps...\n" + actionLog.myText;
                     upgradeTrackerCost++;
                     return true;
-                }
+                }*/
                 else
                 {
                     actionLog.myText = "Insufficient resources!\n" + actionLog.myText;
