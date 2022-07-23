@@ -404,6 +404,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b88b53ca410b18142bad5da11ab6f265, type: 3}
   - {fileID: 8300000, guid: 91d391bfd9e19e349996d7dc69b72d68, type: 3}
   - {fileID: 8300000, guid: 65985d8777a033f489647a334c1e0e7e, type: 3}
+  rerollButton: {fileID: 738304900}
+  rerollButtonText: {fileID: 1180170940}
 --- !u!4 &41452073
 Transform:
   m_ObjectHideFlags: 0
@@ -18910,8 +18912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.17, y: 2.44}
-  m_SizeDelta: {x: 52.1349, y: 33.4621}
+  m_AnchoredPosition: {x: -6.68, y: 2.44}
+  m_SizeDelta: {x: 75, y: 33.4621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738304900
 MonoBehaviour:
@@ -21667,9 +21669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Roll
-
-'
+  m_text: reroll
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}

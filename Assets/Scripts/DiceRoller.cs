@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class DiceRoller : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class DiceRoller : MonoBehaviour
     [SerializeField] float dieSpin = 0.5f;
     [SerializeField] Sprite defaultSprite;
     [SerializeField] List<AudioClip> shakeSounds;
+    [SerializeField] Button rerollButton;
+    [SerializeField] TextMeshProUGUI rerollButtonText;
 
     //cached references
     ActionLog actionLog;
@@ -21,6 +25,8 @@ public class DiceRoller : MonoBehaviour
     int rolledSum;
     int earnedWisps;
     bool rolling = false;
+    bool allDiceLocked = false;
+    bool trackersUpgradeable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +44,46 @@ public class DiceRoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateContextualRollButton();
     }
+
+    private void UpdateContextualRollButton()
+    {
+        allDiceLocked = true;
+        trackersUpgradeable = false;
+        foreach(DieStats die in allDice)
+        {
+            if(!die.locked)
+            {
+                allDiceLocked = false;
+                break;
+            }
+        }
+        foreach(WispTracker wispTracker in wispTrackers)
+        {
+            if(wispTracker.upgradeable)
+            {
+                trackersUpgradeable = true;
+                break;
+            }
+        }
+        if(!allDiceLocked)
+        {
+            rerollButtonText.text = "use dice";
+            rerollButton.interactable = false;
+        }
+        else if(trackersUpgradeable)
+        {
+            rerollButtonText.text = "upgrade a tracker";
+            rerollButton.interactable = false;
+        }
+        else
+        {
+            rerollButtonText.text = "roll dice";
+            rerollButton.interactable = true;
+        }
+    }
+
     public void ButtonRollDice()
     {
         if (rolling || sceneChanger.gameOver) { return; }
