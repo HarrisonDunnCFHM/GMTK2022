@@ -12,6 +12,7 @@ public class ActionCard : MonoBehaviour
     [SerializeField] Action myAction;
     [SerializeField] GameObject myActionSlot;
     [SerializeField] TextMeshProUGUI myCostText;
+    [SerializeField] GameObject greyOutBox;
 
     //cached refs
     ActionLog actionLog;
@@ -22,6 +23,7 @@ public class ActionCard : MonoBehaviour
     bool invalidAction = false;
     public bool hasDie = false;
     public int actionCost;
+    public bool canAfford = true;
     public ResourceType resourceCost;
     int upgradeTrackerCost = 1;
 
@@ -39,6 +41,19 @@ public class ActionCard : MonoBehaviour
     void Update()
     {
         UpdateCostText();
+        UpdateCanAfford();
+    }
+
+    private void UpdateCanAfford()
+    {
+        if(!canAfford || hasDie)
+        {
+            greyOutBox.SetActive(true);
+        }
+        else
+        {
+            greyOutBox.SetActive(false);
+        }
     }
 
     private void UpdateCostText()
@@ -61,11 +76,13 @@ public class ActionCard : MonoBehaviour
         else
         {
             myCostText.text = "Grab a die to see cost";
+            canAfford = true;
         }
     }
 
     private void UpdateCosts(DieStats grabbedDie)
     {
+        int currentAvailable = 0;
         switch (myAction)
         {
             case Action.AddMax:
@@ -75,14 +92,17 @@ public class ActionCard : MonoBehaviour
                     case "Sun":
                         costTypeAsString = "Sunbeam";
                         resourceCost = ResourceType.Sunbeam;
+                        currentAvailable = resourceManager.currentSun;
                         break;
                     case "Moon":
                         costTypeAsString = "Moondrop";
                         resourceCost = ResourceType.Moondrop;
+                        currentAvailable = resourceManager.currentMoon;
                         break;
                     case "Star":
                         costTypeAsString = "Stardust";
                         resourceCost = ResourceType.Stardust;
+                        currentAvailable = resourceManager.currentStar;
                         break;
                     default:
                         costTypeAsString = "";
@@ -90,10 +110,19 @@ public class ActionCard : MonoBehaviour
                 }
                 actionCost = grabbedDie.maxValue;
                 myCostText.text = "Cost: " + actionCost.ToString() + " " + costTypeAsString;
+                if(actionCost > currentAvailable)
+                {
+                    canAfford = false;
+                }
                 break;
             case Action.AddMin:
                 actionCost = grabbedDie.minValue;
                 resourceCost = ResourceType.Wisp;
+                currentAvailable = resourceManager.currentCelestial;
+                if(actionCost > currentAvailable)
+                { 
+                    canAfford = false;
+                }
                 myCostText.text = "Cost: " + actionCost.ToString() + " Wisps";
                 break;
             case Action.UpgradeTracker:
