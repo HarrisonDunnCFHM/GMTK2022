@@ -413,6 +413,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 65985d8777a033f489647a334c1e0e7e, type: 3}
   rerollButton: {fileID: 738304900}
   rerollButtonText: {fileID: 1180170940}
+  shootingWisp: {fileID: 9111273652023547290, guid: cf4d0680e7598504480d59624360b06d, type: 3}
+  wispBankIcon: {fileID: 1825657005}
+  shootDelay: 0.1
+  spawnVectorMultiplier: 20
+  wispTrackers:
+  - {fileID: 418574042}
+  - {fileID: 1266324541}
+  - {fileID: 165891036}
+  - {fileID: 1620193051}
 --- !u!4 &41452073
 Transform:
   m_ObjectHideFlags: 0
@@ -19722,7 +19731,7 @@ MonoBehaviour:
   shootingResource: {fileID: 9111273652023547290, guid: 6916d84ffab4dfa43a71ec7433ad7ea9, type: 3}
   shootingResourceDestination: {fileID: 271473811}
   shootDelay: 0.15
-  spawnVectorMultiplier: 20
+  spawnVectorMultiplier: 30
   hasDie: 0
   actionCost: 0
   canAfford: 1
@@ -27693,7 +27702,7 @@ MonoBehaviour:
   shootingResource: {fileID: 9111273652023547290, guid: 6f8eecf153144c349867afba842d9857, type: 3}
   shootingResourceDestination: {fileID: 1138454909}
   shootDelay: 0.1
-  spawnVectorMultiplier: 20
+  spawnVectorMultiplier: 25
   hasDie: 0
   actionCost: 0
   canAfford: 1

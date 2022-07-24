@@ -29,11 +29,13 @@ public class ShootingResource : MonoBehaviour
 
     private void MoveToTarget()
     {
-        myRigidbody.velocity = Vector2.MoveTowards(myRigidbody.velocity, (targetPos - myRigidbody.transform.position) * moveSpeed, 1f);
+        myRigidbody.velocity = Vector2.MoveTowards(myRigidbody.velocity, (targetPos - myRigidbody.transform.position) * moveSpeed * Time.deltaTime, 1f);
 
         var distToTarget = Vector2.Distance(transform.position, targetPos);
         if (distToTarget < snapDist)
         {
+            transform.position = targetPos;
+            myRigidbody.velocity = Vector2.zero;
             GameObject myParticles = Instantiate(myParticleSystem, transform.position, Quaternion.identity);
             myParticles.GetComponent<ParticleSystem>().Play();
             Destroy(myParticles, 1f);

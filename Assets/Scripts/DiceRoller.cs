@@ -13,6 +13,11 @@ public class DiceRoller : MonoBehaviour
     [SerializeField] List<AudioClip> shakeSounds;
     [SerializeField] Button rerollButton;
     [SerializeField] TextMeshProUGUI rerollButtonText;
+    [SerializeField] ShootingResource shootingWisp;
+    [SerializeField] GameObject wispBankIcon;
+    [SerializeField] float shootDelay = 0.3f;
+    [SerializeField] float spawnVectorMultiplier = 20;
+    [SerializeField] List<WispTracker> wispTrackers;
 
     //cached references
     ActionLog actionLog;
@@ -20,7 +25,6 @@ public class DiceRoller : MonoBehaviour
     ThreatMeter threatMeter;
     AudioManager audioManager;
     ResourceManager resourceManager;
-    List<WispTracker> wispTrackers;
     List<ActionCard> actionCards;
     int rolledSum;
     int earnedWisps;
@@ -36,7 +40,7 @@ public class DiceRoller : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         threatMeter = FindObjectOfType<ThreatMeter>();
         resourceManager = FindObjectOfType<ResourceManager>();
-        wispTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
+        //wispTrackers = new List<WispTracker>(FindObjectsOfType<WispTracker>());
         actionCards = new List<ActionCard>(FindObjectsOfType<ActionCard>());
         StartCoroutine(RollDice());
     }
@@ -128,20 +132,22 @@ public class DiceRoller : MonoBehaviour
         }
         yield return new WaitForSeconds(dieSpin);
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
-        EarnWisps();
+        StartCoroutine(EarnWisps());
         CheckThreat(rolledSum);
         rolling = false;
     }
 
 
-    private void EarnWisps()
+    private IEnumerator EarnWisps()
     {
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
         foreach (WispTracker wispTracker in wispTrackers)
         {
+            yield return new WaitForSeconds(shootDelay);
             if (rolledSum >= wispTracker.currentThreshold)
             {
                 earnedWisps++;
+                ShootResource(1, wispTracker.gameObject);
             }
         }
         if (earnedWisps > 0)
@@ -151,6 +157,20 @@ public class DiceRoller : MonoBehaviour
         }
         earnedWisps = 0;
     }
+
+    private void ShootResource(int resourceGain, GameObject shootingResourceDestination)
+    {
+        for (int i = 0; i < resourceGain; i++)
+        {
+            ShootingResource shotResource = Instantiate(shootingWisp, shootingResourceDestination.transform.position, Quaternion.identity);
+            shotResource.targetPos = wispBankIcon.transform.position;
+            float randomX = Random.Range(-1f, 1f);
+            float randomY = Random.Range(-1f, 1f);
+            Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
+            shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+        }
+    }
+
     private void CheckThreat(int rolledSum)
     {
         if(rolledSum < threatMeter.currentThreatValue)
