@@ -13,6 +13,10 @@ public class ActionCard : MonoBehaviour
     [SerializeField] GameObject myActionSlot;
     [SerializeField] TextMeshProUGUI myCostText;
     [SerializeField] GameObject greyOutBox;
+    [SerializeField] ShootingResource shootingResource;
+    [SerializeField] GameObject shootingResourceDestination;
+    [SerializeField] float shootDelay = 0.1f;
+    [SerializeField] float spawnVectorMultiplier = 3f;
 
     //cached refs
     ActionLog actionLog;
@@ -183,9 +187,9 @@ public class ActionCard : MonoBehaviour
             //break;
             //GainXResource(die);
             //break;
-            case Action.GainOneCelestial:
-                GainXResource(die);
-                break;
+            //case Action.GainOneCelestial:
+             //   GainXResource(die);
+               // break;
             case Action.UpgradeTracker:
                 if (PayCost(resourceCost, actionCost, die)) { UpgradeTracker(); }
                 break;
@@ -294,7 +298,8 @@ public class ActionCard : MonoBehaviour
                     upgradeTrackerCost++;
                     return true;
                 }
-                /*else if (cost <= resourceManager.currentSun + resourceManager.currentMoon + resourceManager.currentStar + resourceManager.currentCelestial)
+                /*
+                else if (cost <= resourceManager.currentSun + resourceManager.currentMoon + resourceManager.currentStar + resourceManager.currentCelestial)
                 {
                     int tempSun = resourceManager.currentSun;
                     int paidSun = 0;
@@ -433,6 +438,22 @@ public class ActionCard : MonoBehaviour
                 actionLog.myText = "Error! No action defined!\n" + actionLog.myText;
                 Debug.Log("no action defined");
                 break;
+        }
+        StartCoroutine(ShootResource(die.currentValue));
+    }
+
+    private IEnumerator ShootResource(int resourceGain)
+    {
+        for(int i = 0; i < resourceGain; i++)
+        {
+            yield return new WaitForSeconds(shootDelay);
+            ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
+            shotResource.targetPos = shootingResourceDestination.transform.position;
+            float randomX = Random.Range(-1f, 0f);
+            float randomY = Random.Range(-1f, 0f);
+            Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
+            shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+
         }
     }
 
