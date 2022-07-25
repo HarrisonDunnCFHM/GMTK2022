@@ -17,6 +17,7 @@ public class ActionCard : MonoBehaviour
     [SerializeField] GameObject shootingResourceDestination;
     [SerializeField] float shootDelay = 0.1f;
     [SerializeField] float spawnVectorMultiplier = 3f;
+    
 
     //cached refs
     ActionLog actionLog;
@@ -183,13 +184,6 @@ public class ActionCard : MonoBehaviour
             case Action.GainXStar:
                 GainXResource(die);
                 break;
-            //GainXResource(die);
-            //break;
-            //GainXResource(die);
-            //break;
-            //case Action.GainOneCelestial:
-             //   GainXResource(die);
-               // break;
             case Action.UpgradeTracker:
                 if (PayCost(resourceCost, actionCost, die)) { UpgradeTracker(); }
                 break;
@@ -398,6 +392,7 @@ public class ActionCard : MonoBehaviour
     {
         die.maxValue++;
         actionLog.myText = die.name + " die max value increased to " + die.maxValue.ToString() + "!\n" + actionLog.myText;
+        StartCoroutine(die.ShootResourceSpend(actionCost,shootDelay, false));
     }
 
     private void IncreaseMinValue(DieStats die)
@@ -411,6 +406,7 @@ public class ActionCard : MonoBehaviour
         {
             die.minValue++;
             actionLog.myText = die.name + " die min value increased to " + die.minValue.ToString() + "!\n" + actionLog.myText;
+            StartCoroutine(die.ShootResourceSpend(actionCost, shootDelay, true));
         }
     }
 
@@ -439,21 +435,20 @@ public class ActionCard : MonoBehaviour
                 Debug.Log("no action defined");
                 break;
         }
-        StartCoroutine(ShootResource(die.currentValue));
+        StartCoroutine(ShootResourceGain(die.currentValue));
     }
 
-    private IEnumerator ShootResource(int resourceGain)
+    private IEnumerator ShootResourceGain(int resourceGain)
     {
         for(int i = 0; i < resourceGain; i++)
         {
-            yield return new WaitForSeconds(shootDelay);
             ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
             shotResource.targetPos = shootingResourceDestination.transform.position;
             float randomX = Random.Range(-1f, 0f);
             float randomY = Random.Range(-1f, 0f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
-
+            yield return new WaitForSeconds(shootDelay);
         }
     }
 

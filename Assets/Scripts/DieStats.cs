@@ -14,6 +14,12 @@ public class DieStats : MonoBehaviour
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float snapDist = 0.3f;
     [SerializeField] List<AudioClip> rollSounds;
+    [SerializeField] ShootingResource shotResource;
+    [SerializeField] ShootingResource shotWisp;
+    [SerializeField] GameObject resourceBankIcon;
+    [SerializeField] GameObject wispBankIcon;
+    [SerializeField] GameObject dieRangeText;
+    [SerializeField] float spawnVectorMultiplier = 20f;
 
     //cached references
     Rigidbody2D myRigidbody;
@@ -131,7 +137,28 @@ public class DieStats : MonoBehaviour
         }
     }
 
- 
+    public IEnumerator ShootResourceSpend(int shotCount, float shotDelay, bool shootWisp)
+    {
+
+        ShootingResource particleToShoot = shotResource;
+        GameObject bankToShootFrom = resourceBankIcon;
+        if (shootWisp)
+        {
+            particleToShoot = shotWisp;
+            bankToShootFrom = wispBankIcon;
+        }
+        for(int i = 0; i < shotCount; i++)
+        {
+            ShootingResource shotParticle = Instantiate(particleToShoot, bankToShootFrom.transform.position, Quaternion.identity);
+            shotParticle.targetPos = dieRangeText.transform.position;
+            float randomX = Random.Range(-1f, 1f);
+            float randomY = Random.Range(-1f, 1f);
+            Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
+            shotParticle.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+            Debug.Log("shooting particle to " + dieRangeText.transform.position);
+            yield return new WaitForSeconds(shotDelay);
+        }
+    }
 
     private void OnMouseEnter()
     {

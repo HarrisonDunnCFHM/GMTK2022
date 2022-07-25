@@ -781,6 +781,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cdfd703e0f579d2409c3a1a91b64ac7a, type: 3}
   - {fileID: 8300000, guid: a5e1f3e8289c803469545b06bf4f7f76, type: 3}
   - {fileID: 8300000, guid: 3ac0f4dc85bf7b54a9c46464c3befe9a, type: 3}
+  shotResource: {fileID: 9111273652023547290, guid: 6916d84ffab4dfa43a71ec7433ad7ea9, type: 3}
+  shotWisp: {fileID: 9111273652023547290, guid: cf4d0680e7598504480d59624360b06d, type: 3}
+  resourceBankIcon: {fileID: 271473811}
+  wispBankIcon: {fileID: 1825657005}
+  dieRangeText: {fileID: 1624810617}
+  spawnVectorMultiplier: 20
   otherDice: []
   startingPos: {x: 0, y: 0, z: 0}
   maxValue: 6
@@ -1773,6 +1779,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cdfd703e0f579d2409c3a1a91b64ac7a, type: 3}
   - {fileID: 8300000, guid: a5e1f3e8289c803469545b06bf4f7f76, type: 3}
   - {fileID: 8300000, guid: 3ac0f4dc85bf7b54a9c46464c3befe9a, type: 3}
+  shotResource: {fileID: 9111273652023547290, guid: 6f8eecf153144c349867afba842d9857, type: 3}
+  shotWisp: {fileID: 9111273652023547290, guid: cf4d0680e7598504480d59624360b06d, type: 3}
+  resourceBankIcon: {fileID: 1138454909}
+  wispBankIcon: {fileID: 1825657005}
+  dieRangeText: {fileID: 1560204327}
+  spawnVectorMultiplier: 20
   otherDice: []
   startingPos: {x: 0, y: 0, z: 0}
   maxValue: 6
@@ -22158,6 +22170,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cdfd703e0f579d2409c3a1a91b64ac7a, type: 3}
   - {fileID: 8300000, guid: a5e1f3e8289c803469545b06bf4f7f76, type: 3}
   - {fileID: 8300000, guid: 3ac0f4dc85bf7b54a9c46464c3befe9a, type: 3}
+  shotResource: {fileID: 9111273652023547290, guid: 7b9489801a8aed64396bbcee3ccdc2c9, type: 3}
+  shotWisp: {fileID: 9111273652023547290, guid: cf4d0680e7598504480d59624360b06d, type: 3}
+  resourceBankIcon: {fileID: 194977230}
+  wispBankIcon: {fileID: 1825657005}
+  dieRangeText: {fileID: 1427414489}
+  spawnVectorMultiplier: 20
   otherDice: []
   startingPos: {x: 0, y: 0, z: 0}
   maxValue: 6
@@ -23815,7 +23833,7 @@ GameObject:
   - component: {fileID: 1427414492}
   - component: {fileID: 1427414491}
   m_Layer: 5
-  m_Name: Red Die Desc
+  m_Name: Sun Die Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24954,7 +24972,7 @@ GameObject:
   - component: {fileID: 1560204330}
   - component: {fileID: 1560204329}
   m_Layer: 5
-  m_Name: Green Die Desc
+  m_Name: Moon Die Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25000,7 +25018,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Green 1-6
+  m_text: Moon 1-6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
@@ -25353,7 +25371,7 @@ GameObject:
   - component: {fileID: 1624810620}
   - component: {fileID: 1624810619}
   m_Layer: 5
-  m_Name: Blue Die Desc
+  m_Name: Star Die Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25399,7 +25417,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Blue 1-6
+  m_text: Star 1-6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
   m_sharedMaterial: {fileID: 410598236066364078, guid: f298b8b8b20e1bc46bf9d3367583eef2, type: 2}
