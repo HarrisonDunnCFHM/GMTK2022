@@ -155,8 +155,10 @@ public class DieStats : MonoBehaviour
             float randomY = Random.Range(-1f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotParticle.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
-            Debug.Log("shooting particle to " + dieRangeText.transform.position);
             yield return new WaitForSeconds(shotDelay);
+            dieRangeText.GetComponent<DieRangeText>().myText.fontSize = dieRangeText.GetComponent<DieRangeText>().enlargedFontSize;
+            dieRangeText.GetComponent<DieRangeText>().myText.color = dieRangeText.GetComponent<DieRangeText>().targetColor;
+
         }
     }
 

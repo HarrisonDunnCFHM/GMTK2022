@@ -314,7 +314,10 @@ MonoBehaviour:
   myCostText: {fileID: 0}
   greyOutBox: {fileID: 2114654784}
   shootingResource: {fileID: 9111273652023547290, guid: 7b9489801a8aed64396bbcee3ccdc2c9, type: 3}
+  eachResource: []
+  eachBankIcon: []
   shootingResourceDestination: {fileID: 194977230}
+  shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
   spawnVectorMultiplier: 20
   hasDie: 0
@@ -19475,7 +19478,16 @@ MonoBehaviour:
   myCostText: {fileID: 1928620008}
   greyOutBox: {fileID: 353983111}
   shootingResource: {fileID: 0}
+  eachResource:
+  - {fileID: 9111273652023547290, guid: 7b9489801a8aed64396bbcee3ccdc2c9, type: 3}
+  - {fileID: 9111273652023547290, guid: 6f8eecf153144c349867afba842d9857, type: 3}
+  - {fileID: 9111273652023547290, guid: 6916d84ffab4dfa43a71ec7433ad7ea9, type: 3}
+  eachBankIcon:
+  - {fileID: 194977230}
+  - {fileID: 1138454909}
+  - {fileID: 271473811}
   shootingResourceDestination: {fileID: 0}
+  shootingEachDestination: {fileID: 879373822}
   shootDelay: 0.1
   spawnVectorMultiplier: 3
   hasDie: 0
@@ -19741,7 +19753,10 @@ MonoBehaviour:
   myCostText: {fileID: 0}
   greyOutBox: {fileID: 1952727136}
   shootingResource: {fileID: 9111273652023547290, guid: 6916d84ffab4dfa43a71ec7433ad7ea9, type: 3}
+  eachResource: []
+  eachBankIcon: []
   shootingResourceDestination: {fileID: 271473811}
+  shootingEachDestination: {fileID: 0}
   shootDelay: 0.15
   spawnVectorMultiplier: 30
   hasDie: 0
@@ -19767,6 +19782,11 @@ Transform:
   m_Father: {fileID: 1003192761}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &879373822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2556268764761675339, guid: 37251a43f06ca424fbd00aa55db4f50a, type: 3}
+  m_PrefabInstance: {fileID: 1367698750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &886794707
 GameObject:
   m_ObjectHideFlags: 0
@@ -23375,7 +23395,10 @@ MonoBehaviour:
   myCostText: {fileID: 201783042}
   greyOutBox: {fileID: 238730329}
   shootingResource: {fileID: 0}
+  eachResource: []
+  eachBankIcon: []
   shootingResourceDestination: {fileID: 0}
+  shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
   spawnVectorMultiplier: 3
   hasDie: 0
@@ -23832,6 +23855,7 @@ GameObject:
   - component: {fileID: 1427414490}
   - component: {fileID: 1427414492}
   - component: {fileID: 1427414491}
+  - component: {fileID: 1427414493}
   m_Layer: 5
   m_Name: Sun Die Desc
   m_TagString: Untagged
@@ -23914,7 +23938,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -23956,6 +23980,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427414489}
   m_CullTransparentMesh: 1
+--- !u!114 &1427414493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427414489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53694daa47965944944c6ff20bbca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontShrinkRate: 0.04
+  colorSpeed: 2
+  targetColor: {r: 1, g: 0.68235296, b: 0, a: 1}
+  enlargedFontSize: 0.1
+  myText: {fileID: 0}
 --- !u!1 &1429436731
 GameObject:
   m_ObjectHideFlags: 0
@@ -24971,6 +25012,7 @@ GameObject:
   - component: {fileID: 1560204328}
   - component: {fileID: 1560204330}
   - component: {fileID: 1560204329}
+  - component: {fileID: 1560204331}
   m_Layer: 5
   m_Name: Moon Die Desc
   m_TagString: Untagged
@@ -25053,7 +25095,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -25095,6 +25137,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560204327}
   m_CullTransparentMesh: 1
+--- !u!114 &1560204331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560204327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53694daa47965944944c6ff20bbca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontShrinkRate: 0.04
+  colorSpeed: 2
+  targetColor: {r: 0, g: 0.62352943, b: 0.87843144, a: 1}
+  enlargedFontSize: 0.1
+  myText: {fileID: 0}
 --- !u!1 &1561226845
 GameObject:
   m_ObjectHideFlags: 0
@@ -25353,7 +25412,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2556268764761675335, guid: 37251a43f06ca424fbd00aa55db4f50a, type: 3}
   m_PrefabInstance: {fileID: 1367698750}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 879373822}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cf051142ecc42a468dc6d3564794f48, type: 3}
@@ -25370,6 +25429,7 @@ GameObject:
   - component: {fileID: 1624810618}
   - component: {fileID: 1624810620}
   - component: {fileID: 1624810619}
+  - component: {fileID: 1624810621}
   m_Layer: 5
   m_Name: Star Die Desc
   m_TagString: Untagged
@@ -25452,7 +25512,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -25494,6 +25554,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624810617}
   m_CullTransparentMesh: 1
+--- !u!114 &1624810621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624810617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53694daa47965944944c6ff20bbca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontShrinkRate: 0.04
+  colorSpeed: 2
+  targetColor: {r: 0.8980393, g: 0, b: 0.8196079, a: 1}
+  enlargedFontSize: 0.1
+  myText: {fileID: 0}
 --- !u!114 &1642038943 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2556268765257098886, guid: 37251a43f06ca424fbd00aa55db4f50a, type: 3}
@@ -27003,7 +27080,10 @@ MonoBehaviour:
   myCostText: {fileID: 1160092860}
   greyOutBox: {fileID: 698324713}
   shootingResource: {fileID: 0}
+  eachResource: []
+  eachBankIcon: []
   shootingResourceDestination: {fileID: 0}
+  shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
   spawnVectorMultiplier: 3
   hasDie: 0
@@ -27718,7 +27798,10 @@ MonoBehaviour:
   myCostText: {fileID: 0}
   greyOutBox: {fileID: 737599753}
   shootingResource: {fileID: 9111273652023547290, guid: 6f8eecf153144c349867afba842d9857, type: 3}
+  eachResource: []
+  eachBankIcon: []
   shootingResourceDestination: {fileID: 1138454909}
+  shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
   spawnVectorMultiplier: 25
   hasDie: 0

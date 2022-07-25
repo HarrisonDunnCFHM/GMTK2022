@@ -14,7 +14,10 @@ public class ActionCard : MonoBehaviour
     [SerializeField] TextMeshProUGUI myCostText;
     [SerializeField] GameObject greyOutBox;
     [SerializeField] ShootingResource shootingResource;
+    [SerializeField] List<ShootingResource> eachResource;
+    [SerializeField] List<GameObject> eachBankIcon;
     [SerializeField] GameObject shootingResourceDestination;
+    [SerializeField] GameObject shootingEachDestination;
     [SerializeField] float shootDelay = 0.1f;
     [SerializeField] float spawnVectorMultiplier = 3f;
     
@@ -440,7 +443,7 @@ public class ActionCard : MonoBehaviour
 
     private IEnumerator ShootResourceGain(int resourceGain)
     {
-        for(int i = 0; i < resourceGain; i++)
+        for (int i = 0; i < resourceGain; i++)
         {
             ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
             shotResource.targetPos = shootingResourceDestination.transform.position;
@@ -449,6 +452,23 @@ public class ActionCard : MonoBehaviour
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
             yield return new WaitForSeconds(shootDelay);
+        }
+    }
+
+    private IEnumerator ShootResourceEach(int resourceSpent)
+    {
+        for (int i = 0; i < resourceSpent; i++)
+        {
+            for(int i2 = 0; i2 < eachResource.Count; i2++)
+            {
+                ShootingResource shotResource = Instantiate(eachResource[i2], eachBankIcon[i2].transform.position, Quaternion.identity);
+                shotResource.targetPos = shootingEachDestination.transform.position;
+                float randomX = Random.Range(-1f, 1f);
+                float randomY = Random.Range(0f, 1f);
+                Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
+                shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+                yield return new WaitForSeconds(shootDelay);
+            }
         }
     }
 
@@ -472,5 +492,6 @@ public class ActionCard : MonoBehaviour
                 wispTracker.upgradeable = true;
             }
         }
+        StartCoroutine(ShootResourceEach(actionCost));
     }
 }
