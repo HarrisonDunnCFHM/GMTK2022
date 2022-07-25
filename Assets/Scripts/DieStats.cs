@@ -61,10 +61,18 @@ public class DieStats : MonoBehaviour
         else
         {
             valueText.text = currentValue.ToString();
+            GetComponentInChildren<Canvas>().sortingOrder = 1 + GetComponent<SpriteRenderer>().sortingOrder;
         }
         statusText.text = name + ": " + minValue.ToString() + " - " + maxValue.ToString();
         GrabDice();
         ReturnHome();
+        if (locked || moving) { 
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().sortingOrder = -Mathf.Abs(GetComponent<SpriteRenderer>().sortingOrder);
+        }
+        else { GetComponent<Collider2D>().enabled = true; 
+               GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(GetComponent<SpriteRenderer>().sortingOrder);
+        }
     }
 
     private void ReturnHome()
