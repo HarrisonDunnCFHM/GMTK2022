@@ -10,10 +10,16 @@ public class ShootingResource : MonoBehaviour
     [SerializeField] float snapDist = 0.01f;
     [SerializeField] float spawnCooldown = 0.3f;
     [SerializeField] GameObject myParticleSystem;
-    
+    [SerializeField] float timeOfLerp = 0.1f;
+
     //cached references
     public Vector3 targetPos;
     Rigidbody2D myRigidbody;
+    bool originalVelocitySaved = false;
+    Vector2 originalVelocity;
+    Vector2 targetVelocity;
+    float lerpTimer = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +35,22 @@ public class ShootingResource : MonoBehaviour
 
     private void MoveToTarget()
     {
-        myRigidbody.velocity = Vector2.MoveTowards(myRigidbody.velocity, (targetPos - myRigidbody.transform.position) * moveSpeed * Time.deltaTime, 1f);
+        if(!originalVelocitySaved)
+        {
+            originalVelocity = myRigidbody.velocity;
+            targetVelocity = targetPos - myRigidbody.transform.position;
+            originalVelocitySaved = true;
+        }
+        if (lerpTimer < timeOfLerp)
+        {
+            myRigidbody.velocity = Vector2.Lerp(originalVelocity, targetPos - myRigidbody.transform.position, lerpTimer / timeOfLerp);
+            lerpTimer += Time.deltaTime;
+        }
+        else
+        {
+            myRigidbody.velocity = (targetPos - myRigidbody.transform.position).normalized * moveSpeed;
+        }
+        //myRigidbody.velocity = Vector2.MoveTowards(myRigidbody.velocity, (targetPos - myRigidbody.transform.position), moveSpeed * Time.deltaTime);
 
         var distToTarget = Vector2.Distance(transform.position, targetPos);
         if (distToTarget < snapDist)

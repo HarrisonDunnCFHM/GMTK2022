@@ -4913,10 +4913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6ed2187a72c6c44bd22b4c645cf75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4000
-  snapDist: 0.05
+  moveSpeed: 20
+  snapDist: 0.3
   spawnCooldown: 0.6
   myParticleSystem: {fileID: 547781181}
+  timeOfLerp: 0.2
   targetPos: {x: 0, y: 0, z: 0}
 --- !u!50 &3438190604543010204
 Rigidbody2D:

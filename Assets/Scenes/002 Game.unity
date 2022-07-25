@@ -319,7 +319,7 @@ MonoBehaviour:
   shootingResourceDestination: {fileID: 194977230}
   shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
-  spawnVectorMultiplier: 20
+  spawnVectorMultiplier: 30
   hasDie: 0
   actionCost: 0
   canAfford: 1
@@ -419,7 +419,7 @@ MonoBehaviour:
   shootingWisp: {fileID: 9111273652023547290, guid: cf4d0680e7598504480d59624360b06d, type: 3}
   wispBankIcon: {fileID: 1825657005}
   shootDelay: 0.1
-  spawnVectorMultiplier: 20
+  spawnVectorMultiplier: 30
   wispTrackers:
   - {fileID: 418574042}
   - {fileID: 1266324541}
@@ -27803,7 +27803,7 @@ MonoBehaviour:
   shootingResourceDestination: {fileID: 1138454909}
   shootingEachDestination: {fileID: 0}
   shootDelay: 0.1
-  spawnVectorMultiplier: 25
+  spawnVectorMultiplier: 30
   hasDie: 0
   actionCost: 0
   canAfford: 1
