@@ -18,6 +18,7 @@ public class DiceRoller : MonoBehaviour
     [SerializeField] float shootDelay = 0.3f;
     [SerializeField] float spawnVectorMultiplier = 20;
     [SerializeField] List<WispTracker> wispTrackers;
+    [SerializeField] GameObject threatTracker;
 
     //cached references
     ActionLog actionLog;
@@ -31,6 +32,7 @@ public class DiceRoller : MonoBehaviour
     bool rolling = false;
     bool allDiceLocked = false;
     bool trackersUpgradeable = false;
+    bool gameLost = false;
 
     // Start is called before the first frame update
     void Start()
@@ -147,7 +149,7 @@ public class DiceRoller : MonoBehaviour
             if (rolledSum >= wispTracker.currentThreshold)
             {
                 earnedWisps++;
-                ShootResource(1, wispTracker.gameObject);
+                ShootResource(1, wispTracker.gameObject, wispBankIcon);
             }
         }
         if (earnedWisps > 0)
@@ -158,14 +160,14 @@ public class DiceRoller : MonoBehaviour
         earnedWisps = 0;
     }
 
-    private void ShootResource(int resourceGain, GameObject shootingResourceDestination)
+    private void ShootResource(int resourceGain, GameObject shootingResourceOrigin, GameObject shootingResourceDestination)
     {
         for (int i = 0; i < resourceGain; i++)
         {
-            ShootingResource shotResource = Instantiate(shootingWisp, shootingResourceDestination.transform.position, Quaternion.identity);
-            shotResource.targetPos = wispBankIcon.transform.position;
+            ShootingResource shotResource = Instantiate(shootingWisp, shootingResourceOrigin.transform.position, Quaternion.identity);
+            shotResource.targetPos = shootingResourceDestination.transform.position;
             float randomX = Random.Range(-1f, 1f);
-            float randomY = Random.Range(-1f, 1f);
+            float randomY = Random.Range(0f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
         }
@@ -176,8 +178,19 @@ public class DiceRoller : MonoBehaviour
         if(rolledSum < threatMeter.currentThreatValue)
         {
             int threatDiff = threatMeter.currentThreatValue - rolledSum;
-            resourceManager.currentCelestial -= threatDiff;
-            if (resourceManager.currentCelestial < 0)
+            int wispsToShoot = threatDiff;
+            if (threatDiff <= resourceManager.currentCelestial)
+            {
+                resourceManager.currentCelestial -= threatDiff;
+                //shoot wisps
+            }
+            else
+            {
+                gameLost = true;
+                wispsToShoot = resourceManager.currentCelestial;
+                resourceManager.currentCelestial = 0;
+            }
+            if (gameLost)
             {
                 actionLog.myText = "Uh oh. You rolled lower than the current threat level AND didn't have enough Celestial Wisps. " +
                     "You've lost the game...\n" + actionLog.myText;
@@ -188,6 +201,7 @@ public class DiceRoller : MonoBehaviour
                 actionLog.myText = "Oh no! You rolled lower than the current threat level. You paid " + threatDiff.ToString() +
                     " Wisps to hold off the darkness!\n" + actionLog.myText;
             }
+            ShootResource(wispsToShoot, wispBankIcon, threatTracker);
         }
     }
 }

@@ -33,9 +33,9 @@ public class ResourceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sunResourceText.text = "Sunbeams: " + currentSun.ToString();
-        moonResourceText.text = "Moondrops: " + currentMoon.ToString();
-        starResourceText.text = "Stardust: " + currentStar.ToString();
-        celestialResourceText.text = "Wisps: " + currentCelestial.ToString();
+        sunResourceText.text = "Sunbeams\n" + currentSun.ToString();
+        moonResourceText.text = "Moondrops\n" + currentMoon.ToString();
+        starResourceText.text = "Stardust\n" + currentStar.ToString();
+        celestialResourceText.text = "Wisps\n" + currentCelestial.ToString();
     }
 }

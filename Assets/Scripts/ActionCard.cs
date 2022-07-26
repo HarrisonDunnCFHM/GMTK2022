@@ -447,8 +447,8 @@ public class ActionCard : MonoBehaviour
         {
             ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
             shotResource.targetPos = shootingResourceDestination.transform.position;
-            float randomX = Random.Range(-1f, 0f);
-            float randomY = Random.Range(-1f, 0f);
+            float randomX = Random.Range(-1f, 1f);
+            float randomY = Random.Range(0f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
             yield return new WaitForSeconds(shootDelay);
@@ -464,7 +464,7 @@ public class ActionCard : MonoBehaviour
                 ShootingResource shotResource = Instantiate(eachResource[i2], eachBankIcon[i2].transform.position, Quaternion.identity);
                 shotResource.targetPos = shootingEachDestination.transform.position;
                 float randomX = Random.Range(-1f, 1f);
-                float randomY = Random.Range(0f, 1f);
+                float randomY = Random.Range(-1f, 0f);
                 Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
                 shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
                 yield return new WaitForSeconds(shootDelay);

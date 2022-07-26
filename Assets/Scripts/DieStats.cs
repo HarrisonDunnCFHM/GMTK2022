@@ -159,7 +159,7 @@ public class DieStats : MonoBehaviour
         {
             ShootingResource shotParticle = Instantiate(particleToShoot, bankToShootFrom.transform.position, Quaternion.identity);
             shotParticle.targetPos = dieRangeText.transform.position;
-            float randomX = Random.Range(-1f, 1f);
+            float randomX = Random.Range(0f, 1f);
             float randomY = Random.Range(-1f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotParticle.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
