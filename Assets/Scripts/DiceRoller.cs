@@ -135,7 +135,6 @@ public class DiceRoller : MonoBehaviour
         yield return new WaitForSeconds(dieSpin);
         rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
         StartCoroutine(EarnWisps());
-        CheckThreat(rolledSum);
         rolling = false;
     }
 
@@ -158,6 +157,7 @@ public class DiceRoller : MonoBehaviour
             resourceManager.currentCelestial += earnedWisps;
         }
         earnedWisps = 0;
+        CheckThreat(rolledSum);
     }
 
     private void ShootResource(int resourceGain, GameObject shootingResourceOrigin, GameObject shootingResourceDestination)
