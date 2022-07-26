@@ -96,10 +96,10 @@ public class DiceRoller : MonoBehaviour
         if (threatMeter.currentThreatValue < allDice[0].maxValue + allDice[1].maxValue + allDice[2].maxValue)
         {
             threatMeter.currentThreatValue++;
-            foreach(ActionCard card in actionCards)
-            {
-                card.hasDie = false;
-            }
+        }
+        foreach(ActionCard card in actionCards)
+        {
+            card.hasDie = false;
         }
         StartCoroutine(RollDice());
     }
@@ -157,7 +157,7 @@ public class DiceRoller : MonoBehaviour
             resourceManager.currentCelestial += earnedWisps;
         }
         earnedWisps = 0;
-        CheckThreat(rolledSum);
+        StartCoroutine(CheckThreat(rolledSum));
     }
 
     private void ShootResource(int resourceGain, GameObject shootingResourceOrigin, GameObject shootingResourceDestination)
@@ -173,7 +173,7 @@ public class DiceRoller : MonoBehaviour
         }
     }
 
-    private void CheckThreat(int rolledSum)
+    private IEnumerator CheckThreat(int rolledSum)
     {
         if(rolledSum < threatMeter.currentThreatValue)
         {
@@ -201,7 +201,11 @@ public class DiceRoller : MonoBehaviour
                 actionLog.myText = "Oh no! You rolled lower than the current threat level. You paid " + threatDiff.ToString() +
                     " Wisps to hold off the darkness!\n" + actionLog.myText;
             }
-            ShootResource(wispsToShoot, wispBankIcon, threatTracker);
+            for (int i = 0; i < wispsToShoot; i++)
+            {
+                yield return new WaitForSeconds(shootDelay);
+                ShootResource(1, wispBankIcon, threatTracker);
+            }
         }
     }
 }
