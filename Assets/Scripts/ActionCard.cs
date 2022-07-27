@@ -443,14 +443,16 @@ public class ActionCard : MonoBehaviour
 
     private IEnumerator ShootResourceGain(int resourceGain)
     {
+        float randomF = Random.Range(1.4f, 2.2f);
         for (int i = 0; i < resourceGain; i++)
         {
             ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
-            shotResource.targetPos = shootingResourceDestination.transform.position;
+            shotResource.targetObj = shootingResourceDestination;
             float randomX = Random.Range(-1f, 1f);
             float randomY = Random.Range(0f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+            shotResource.GetComponent<AudioSource>().pitch = randomF + (i * 0.1f);
             yield return new WaitForSeconds(shootDelay);
         }
     }
@@ -459,14 +461,16 @@ public class ActionCard : MonoBehaviour
     {
         for (int i = 0; i < resourceSpent; i++)
         {
+            float randomF = Random.Range(1.4f, 2.2f);
             for(int i2 = 0; i2 < eachResource.Count; i2++)
             {
                 ShootingResource shotResource = Instantiate(eachResource[i2], eachBankIcon[i2].transform.position, Quaternion.identity);
-                shotResource.targetPos = shootingEachDestination.transform.position;
+                shotResource.targetObj = shootingEachDestination;
                 float randomX = Random.Range(-1f, 1f);
                 float randomY = Random.Range(-1f, 0f);
                 Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
                 shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+                shotResource.GetComponent<AudioSource>().pitch = randomF + (i * 0.1f);
                 yield return new WaitForSeconds(shootDelay);
             }
         }

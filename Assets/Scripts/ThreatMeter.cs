@@ -57,6 +57,7 @@ public class ThreatMeter : MonoBehaviour
         var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;
         var newThreatTrackerPos = new Vector3((sliderOffset * sliderLength) + mySlider.transform.position.x, threatTracker.transform.position.y, threatTracker.transform.position.z);
         threatTracker.transform.position = Vector2.MoveTowards(threatTracker.transform.position, newThreatTrackerPos, moveSpeed * Time.deltaTime);
+        mySlider.value = currentThreatValue;
 
     }
     private void UpdateWispTrackers()

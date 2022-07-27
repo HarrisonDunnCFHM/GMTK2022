@@ -155,18 +155,18 @@ public class DieStats : MonoBehaviour
             particleToShoot = shotWisp;
             bankToShootFrom = wispBankIcon;
         }
-        for(int i = 0; i < shotCount; i++)
+        float randomF = Random.Range(1.4f, 2.2f);
+        for (int i = 0; i < shotCount; i++)
         {
             ShootingResource shotParticle = Instantiate(particleToShoot, bankToShootFrom.transform.position, Quaternion.identity);
-            shotParticle.targetPos = dieRangeText.transform.position;
+            shotParticle.targetObj = dieRangeText;
             float randomX = Random.Range(0f, 1f);
             float randomY = Random.Range(-1f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
             shotParticle.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
+            shotResource.GetComponent<AudioSource>().pitch = randomF + (i * 0.1f);
             yield return new WaitForSeconds(shotDelay);
-            dieRangeText.GetComponent<DieRangeText>().myText.fontSize = dieRangeText.GetComponent<DieRangeText>().enlargedFontSize;
-            dieRangeText.GetComponent<DieRangeText>().myText.color = dieRangeText.GetComponent<DieRangeText>().targetColor;
-
+            
         }
     }
 

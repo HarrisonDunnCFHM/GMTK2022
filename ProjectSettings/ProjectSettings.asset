@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Wisps
-  defaultCursor: {fileID: 2800000, guid: 50ff7e902257c9643a0fb45e285b408d, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 14c63fdb7c2e0dd41949c2c0596b0e8f, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
