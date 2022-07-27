@@ -69,7 +69,7 @@ public class ShootingResource : MonoBehaviour
                 GetComponent<SpriteRenderer>().enabled = false;
                 GameObject myParticles = Instantiate(myParticleSystem, transform.position, Quaternion.identity);
                 myParticles.GetComponent<ParticleSystem>().Play();
-                GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().masterVolume * .1f;
+                GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().masterVolume * .05f;
                 GetComponent<AudioSource>().Play();
                 //AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, Camera.main.transform.position, FindObjectOfType<AudioManager>().masterVolume);
                 Destroy(myParticles, 1f);

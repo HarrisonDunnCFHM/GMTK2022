@@ -1066,9 +1066,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Design, Programming, Art, SFX - CFHM
+  m_text: 'Original Work
 
-    Music - John Praw
+    Design, Programming, Art, SFX, Font - CFHM
+
+    Music
+    - "Stellar" by John Praw
+
+
+    Additional Assets
+
+    Bit break SFX - pmsfx.com
 
     Background
     Art - Digital Moons'
@@ -1098,8 +1106,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

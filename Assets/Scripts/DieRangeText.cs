@@ -19,7 +19,10 @@ public class DieRangeText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myText = GetComponent<TextMeshProUGUI>();
+        if (myText == null)
+        {
+            myText = GetComponent<TextMeshProUGUI>();
+        }
         defaultColor = myText.color;
         defaultFontSize = myText.fontSize;
     }

@@ -83,8 +83,22 @@ public class ActionCard : MonoBehaviour
         }
         else
         {
-            myCostText.text = "Grab a die to see cost";
             canAfford = true;
+            switch(myAction)
+            {
+                case Action.UpgradeTracker:
+                    actionCost = upgradeTrackerCost;
+                    resourceCost = ResourceType.All;
+                    if (actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
+                    {
+                        canAfford = false;
+                    }
+                    myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
+                    break;
+                default:
+                    myCostText.text = "Grab a die to see cost";
+                    break;
+            }
         }
     }
 
@@ -134,13 +148,13 @@ public class ActionCard : MonoBehaviour
                 myCostText.text = "Cost: " + actionCost.ToString() + " Wisps";
                 break;
             case Action.UpgradeTracker:
-                actionCost = upgradeTrackerCost;
+                /*actionCost = upgradeTrackerCost;
                 resourceCost = ResourceType.All;
                 if(actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
                 {
                     canAfford = false;
                 }
-                myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
+                myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";*/
                 break;
             default:
                 break;
