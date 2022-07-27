@@ -20,12 +20,16 @@ public class ShootingResource : MonoBehaviour
     Vector2 targetVelocity;
     float lerpTimer = 0;
     bool destroying = false;
+    public bool increaseResource = false;
+    public ActionCard.ResourceType resourceToIncrease;
+    ResourceManager resourceManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        resourceManager = FindObjectOfType<ResourceManager>();
     }
 
     // Update is called once per frame
@@ -66,25 +70,34 @@ public class ShootingResource : MonoBehaviour
                     targetObj.GetComponent<DieRangeText>().myText.fontSize = targetObj.GetComponent<DieRangeText>().enlargedFontSize;
                     targetObj.GetComponent<DieRangeText>().myText.color = targetObj.GetComponent<DieRangeText>().targetColor;
                 }
+                if(increaseResource)
+                {
+                    switch (resourceToIncrease)
+                    {
+                        case ActionCard.ResourceType.Sunbeam:
+                            resourceManager.currentSun++;
+                            break;
+                        case ActionCard.ResourceType.Moondrop:
+                            resourceManager.currentMoon++;
+                            break;
+                        case ActionCard.ResourceType.Stardust:
+                            resourceManager.currentStar++;
+                            break;
+                        case ActionCard.ResourceType.Wisp:
+                            resourceManager.currentCelestial++;
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 GetComponent<SpriteRenderer>().enabled = false;
                 GameObject myParticles = Instantiate(myParticleSystem, transform.position, Quaternion.identity);
                 myParticles.GetComponent<ParticleSystem>().Play();
                 GetComponent<AudioSource>().volume = FindObjectOfType<AudioManager>().masterVolume * .05f;
                 GetComponent<AudioSource>().Play();
-                //AudioSource.PlayClipAtPoint(GetComponent<AudioSource>().clip, Camera.main.transform.position, FindObjectOfType<AudioManager>().masterVolume);
                 Destroy(myParticles, 1f);
                 Destroy(gameObject, GetComponent<AudioSource>().clip.length);
             }
-        }
-        /*if (spawnCooldown < 0f)
-        {
-            myRigidbody.velocity = (targetPos - myRigidbody.transform.position) * moveSpeed;
-            var distToTarget = Vector2.Distance(transform.position, targetPos);
-            if (distToTarget < snapDist)
-            {
-                Destroy(gameObject);
-            }
-        }
-        else { spawnCooldown -= Time.deltaTime; }*/
+        }      
     }
 }

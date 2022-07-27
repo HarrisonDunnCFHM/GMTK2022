@@ -21,12 +21,14 @@ public class ThreatMeter : MonoBehaviour
     Slider mySlider;
     int sumValue;
     public int currentThreatValue;
+    DiceRoller diceRoller;
     
     // Start is called before the first frame update
     void Start()
     {
         mySlider = GetComponent<Slider>();
         currentThreatValue = 0;
+        diceRoller = FindObjectOfType<DiceRoller>();
     }
 
     // Update is called once per frame
@@ -42,7 +44,7 @@ public class ThreatMeter : MonoBehaviour
 
     private void UpdateSumTracker()
     {
-        sumValue = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
+        sumValue = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue + diceRoller.addedWisps;
         sumValueText.text = sumValue.ToString();
         var sliderOffset = (sumValue - (mySlider.maxValue / 2)) / (mySlider.maxValue / 2);
         var sliderLength = mySlider.transform.localScale.x * mySlider.GetComponent<RectTransform>().sizeDelta.x / 2;

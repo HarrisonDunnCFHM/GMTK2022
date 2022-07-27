@@ -429,39 +429,45 @@ public class ActionCard : MonoBehaviour
 
     private void GainXResource(DieStats die)
     {
+        ResourceType gainThisType = ResourceType.Sunbeam;
         switch(myAction)
         {
             case Action.GainXSun:
-                resourceManager.currentSun += die.currentValue;
+                //resourceManager.currentSun += die.currentValue;
+                gainThisType = ResourceType.Sunbeam;
                 actionLog.myText = "Gained " + die.currentValue.ToString() + " Sunbeams\n" + actionLog.myText;
                 break;
             case Action.GainXMoon:
-                resourceManager.currentMoon += die.currentValue;
+                //resourceManager.currentMoon += die.currentValue;
+                gainThisType = ResourceType.Moondrop;
                 actionLog.myText = "Gained " + die.currentValue.ToString() + " Moondrops\n" + actionLog.myText;
                 break;
             case Action.GainXStar:
-                resourceManager.currentStar += die.currentValue;
+                //resourceManager.currentStar += die.currentValue;
+                gainThisType = ResourceType.Stardust;
                 actionLog.myText = "Gained " + die.currentValue.ToString() + " Stardust\n" + actionLog.myText;
                 break;
-            case Action.GainOneCelestial:
+            /*case Action.GainOneCelestial:
                 resourceManager.currentCelestial++;
                 actionLog.myText = "Gained 1 Celestial Wisp!\n" + actionLog.myText;
-                break;
+                break;*/
             default:
                 actionLog.myText = "Error! No action defined!\n" + actionLog.myText;
                 Debug.Log("no action defined");
                 break;
         }
-        StartCoroutine(ShootResourceGain(die.currentValue));
+        StartCoroutine(ShootResourceGain(die.currentValue, gainThisType));
     }
 
-    private IEnumerator ShootResourceGain(int resourceGain)
+    private IEnumerator ShootResourceGain(int resourceGain, ResourceType resourceToGain)
     {
         float randomF = Random.Range(1.4f, 2.2f);
         for (int i = 0; i < resourceGain; i++)
         {
             ShootingResource shotResource = Instantiate(shootingResource, myActionSlot.transform.position, Quaternion.identity);
             shotResource.targetObj = shootingResourceDestination;
+            shotResource.resourceToIncrease = resourceToGain;
+            shotResource.increaseResource = true;
             float randomX = Random.Range(-1f, 1f);
             float randomY = Random.Range(0f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);

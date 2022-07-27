@@ -33,6 +33,7 @@ public class DiceRoller : MonoBehaviour
     bool allDiceLocked = false;
     bool trackersUpgradeable = false;
     bool gameLost = false;
+    public int addedWisps = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -114,6 +115,7 @@ public class DiceRoller : MonoBehaviour
         actionLog.myText = "\n" + actionLog.myText;
         foreach(DieStats die in allDice)
         {
+            addedWisps = 0;
             die.GetComponent<Animator>().enabled = true;
             die.currentValue = 0;
         }
@@ -141,13 +143,13 @@ public class DiceRoller : MonoBehaviour
 
     private IEnumerator EarnWisps()
     {
-        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
+        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue + addedWisps;
         foreach (WispTracker wispTracker in wispTrackers)
         {
             yield return new WaitForSeconds(shootDelay);
             if (rolledSum >= wispTracker.currentThreshold)
             {
-                earnedWisps++;
+                //earnedWisps++;
                 ShootResource(1, wispTracker.gameObject, wispBankIcon);
             }
         }
@@ -167,6 +169,11 @@ public class DiceRoller : MonoBehaviour
         {
             ShootingResource shotResource = Instantiate(shootingWisp, shootingResourceOrigin.transform.position, Quaternion.identity);
             shotResource.targetObj = shootingResourceDestination;
+            if(shootingResourceDestination == wispBankIcon)
+            {
+                shotResource.increaseResource = true;
+                shotResource.resourceToIncrease = ActionCard.ResourceType.Wisp;
+            }
             float randomX = Random.Range(-1f, 1f);
             float randomY = Random.Range(0f, 1f);
             Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
@@ -185,7 +192,6 @@ public class DiceRoller : MonoBehaviour
             if (threatDiff <= resourceManager.currentCelestial)
             {
                 resourceManager.currentCelestial -= threatDiff;
-                //shoot wisps
             }
             else
             {
@@ -208,6 +214,16 @@ public class DiceRoller : MonoBehaviour
             {
                 yield return new WaitForSeconds(shootDelay);
                 ShootResource(1, wispBankIcon, threatTracker);
+                addedWisps++;
+                rolledSum++;
+                foreach(WispTracker tracker in wispTrackers)
+                {
+                    if (rolledSum == tracker.currentThreshold)
+                    {
+                        ShootResource(1, tracker.gameObject, wispBankIcon);
+                        resourceManager.currentCelestial++;
+                    }
+                }
             }
         }
     }

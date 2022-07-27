@@ -4920,6 +4920,8 @@ MonoBehaviour:
   myParticleSystem: {fileID: 547781181}
   timeOfLerp: 0.2
   targetObj: {fileID: 0}
+  increaseResource: 0
+  resourceToIncrease: 0
 --- !u!50 &3438190604543010204
 Rigidbody2D:
   serializedVersion: 4
@@ -4980,7 +4982,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: a9244ba249c3cc341aec4def7d91456c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0
-  m_Pitch: 2.4699912
+  m_Pitch: 2.5650153
   Loop: 0
   Mute: 0
   Spatialize: 0

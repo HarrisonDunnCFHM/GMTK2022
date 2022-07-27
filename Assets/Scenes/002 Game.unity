@@ -426,7 +426,8 @@ MonoBehaviour:
   - {fileID: 1266324541}
   - {fileID: 165891036}
   - {fileID: 1620193051}
-  threatTracker: {fileID: 372431481}
+  threatTracker: {fileID: 1108247048}
+  addedWisps: 0
 --- !u!4 &41452073
 Transform:
   m_ObjectHideFlags: 0
@@ -29294,7 +29295,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 18
   m_WholeNumbers: 0
-  m_Value: 12.2
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -29361,7 +29362,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.67777777
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
