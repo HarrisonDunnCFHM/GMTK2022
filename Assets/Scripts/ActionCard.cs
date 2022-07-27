@@ -93,6 +93,7 @@ public class ActionCard : MonoBehaviour
                     {
                         canAfford = false;
                     }
+                    else { canAfford = true; }
                     myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
                     break;
                 default:
@@ -136,6 +137,7 @@ public class ActionCard : MonoBehaviour
                 {
                     canAfford = false;
                 }
+                else { canAfford = true; }
                 break;
             case Action.AddMin:
                 actionCost = grabbedDie.minValue;
@@ -145,16 +147,18 @@ public class ActionCard : MonoBehaviour
                 { 
                     canAfford = false;
                 }
+                else { canAfford = true; }
                 myCostText.text = "Cost: " + actionCost.ToString() + " Wisps";
                 break;
             case Action.UpgradeTracker:
-                /*actionCost = upgradeTrackerCost;
+                actionCost = upgradeTrackerCost;
                 resourceCost = ResourceType.All;
-                if(actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
+                if (actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
                 {
                     canAfford = false;
                 }
-                myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";*/
+                else { canAfford = true; }
+                myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
                 break;
             default:
                 break;
