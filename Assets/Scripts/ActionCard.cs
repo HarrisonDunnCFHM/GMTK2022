@@ -152,13 +152,13 @@ public class ActionCard : MonoBehaviour
                 break;
             case Action.UpgradeTracker:
                 actionCost = upgradeTrackerCost;
-                resourceCost = ResourceType.All;
-                if (actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
-                {
-                    canAfford = false;
-                }
-                else { canAfford = true; }
-                myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
+                    resourceCost = ResourceType.All;
+                    if (actionCost > resourceManager.currentSun || actionCost > resourceManager.currentMoon || actionCost > resourceManager.currentStar)
+                    {
+                        canAfford = false;
+                    }
+                    else { canAfford = true; }
+                    myCostText.text = "Cost: " + actionCost.ToString() + " each - Sunbeam, Moondrop, Stardust";
                 break;
             default:
                 break;
@@ -495,7 +495,8 @@ public class ActionCard : MonoBehaviour
                 Vector2 tempVelocity = new Vector2(randomX * spawnVectorMultiplier, randomY * spawnVectorMultiplier);
                 shotResource.gameObject.GetComponent<Rigidbody2D>().velocity = tempVelocity;
                 shotResource.GetComponent<AudioSource>().pitch = randomF + (i * 0.1f);
-                yield return new WaitForSeconds(shootDelay);
+                float timeToDelay = shootDelay * 2 / (float)i;
+                yield return new WaitForSeconds(shootDelay * 2);
             }
         }
     }

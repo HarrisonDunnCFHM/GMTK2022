@@ -143,7 +143,7 @@ public class DiceRoller : MonoBehaviour
 
     private IEnumerator EarnWisps()
     {
-        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue + addedWisps;
+        rolledSum = allDice[0].currentValue + allDice[1].currentValue + allDice[2].currentValue;
         foreach (WispTracker wispTracker in wispTrackers)
         {
             yield return new WaitForSeconds(shootDelay);
@@ -188,7 +188,31 @@ public class DiceRoller : MonoBehaviour
         if(rolledSum < threatMeter.currentThreatValue)
         {
             int threatDiff = threatMeter.currentThreatValue - rolledSum;
-            int wispsToShoot = threatDiff;
+            int wispsToShoot = Mathf.Min(threatDiff,resourceManager.currentCelestial);
+            for (int i = 0; i < wispsToShoot; i++)
+            {
+                yield return new WaitForSeconds(shootDelay);
+                ShootResource(1, wispBankIcon, threatTracker);
+                resourceManager.currentCelestial--;
+                addedWisps++;
+                rolledSum++;
+                foreach (WispTracker tracker in wispTrackers)
+                {
+                    if (rolledSum == tracker.currentThreshold)
+                    {
+                        ShootResource(1, tracker.gameObject, wispBankIcon);
+                        wispsToShoot++;
+                        //resourceManager.currentCelestial++;
+                    }
+                }
+                if (rolledSum == threatMeter.currentThreatValue) { break; }
+            }
+            if(rolledSum < threatMeter.currentThreatValue)
+            {
+                gameLost = true;
+                sceneChanger.gameOver = true;
+            }
+            /*
             if (threatDiff <= resourceManager.currentCelestial)
             {
                 resourceManager.currentCelestial -= threatDiff;
@@ -203,7 +227,6 @@ public class DiceRoller : MonoBehaviour
             {
                 actionLog.myText = "Uh oh. You rolled lower than the current threat level AND didn't have enough Celestial Wisps. " +
                     "You've lost the game...\n" + actionLog.myText;
-                sceneChanger.gameOver = true;
             }
             else
             {
@@ -224,7 +247,7 @@ public class DiceRoller : MonoBehaviour
                         resourceManager.currentCelestial++;
                     }
                 }
-            }
+            }*/
         }
     }
 }

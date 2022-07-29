@@ -36,6 +36,13 @@ public class ResourceManager : MonoBehaviour
         sunResourceText.text = "Sunbeams\n" + currentSun.ToString();
         moonResourceText.text = "Moondrops\n" + currentMoon.ToString();
         starResourceText.text = "Stardust\n" + currentStar.ToString();
-        celestialResourceText.text = "Wisps\n" + currentCelestial.ToString();
+        if (currentCelestial < 0)
+        {
+            celestialResourceText.text = "Wisps\n0";
+        }
+        else
+        {
+            celestialResourceText.text = "Wisps\n" + currentCelestial.ToString();
+        }
     }
 }
